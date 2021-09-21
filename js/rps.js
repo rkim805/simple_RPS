@@ -33,6 +33,7 @@ function computerPlay() {
 
 function playRound(playerSelection, computerSelection) {
   let retVal;
+  let display = document.querySelector('#display');
   if(computerSelection == null) {
     return "Error: Computer input";
   }
@@ -79,7 +80,9 @@ score = {
 };
 
 function gameStateUpdate(result) {
+  let display = document.querySelector("#display");
   let scoreDisplay = document.querySelector("#score-display");
+  let finalDisplay = document.querySelector("#final-result");
   switch(result) {
     case "Loss":
       score.computerScore++;
