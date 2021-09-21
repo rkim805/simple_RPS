@@ -53,14 +53,15 @@ function playRound(playerSelection, computerSelection) {
   return retVal;
 }
 
+/*
 function game() {
-  console.log("Lets play 5 rounds of Rock, Paper Scissors!");
+  console.log("Lets play Rock, Paper Scissors! First to 5 wins!");
   let playPrompt;
   let score = {
     playerScore: 0,
     computerScore: 0
   };
-  for(let i = 0; i < 5; i++) {
+  while(true) {
     playPrompt = prompt("Enter Rock, Paper, or Scissors!");
     let result = playRound(playPrompt, computerPlay());
     switch(result) {
@@ -94,8 +95,24 @@ function game() {
   else {
     console.log("Tie! How drab!");
   }
-}
+}*/
 
 function capitalize(string) {
   return string.slice(0,1).toUpperCase() + string.slice(1);
 }
+
+const rockBtn = document.querySelector('#rock');
+const paperBtn = document.querySelector('#paper');
+const scissorsBtn = document.querySelector('#scissors');
+
+rockBtn.addEventListener('click', () => {
+  playRound("rock", computerPlay());
+});
+
+paperBtn.addEventListener('click', () => {
+  playRound("paper", computerPlay());
+});
+
+scissorsBtn.addEventListener('click', () => {
+  playRound("scissors", computerPlay());
+});
