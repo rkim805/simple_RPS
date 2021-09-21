@@ -11,6 +11,7 @@ function computerPlay() {
   }
 }
 
+
 function playRound(playerSelection, computerSelection) {
   let retVal;
   if(computerSelection == null) {
@@ -18,87 +19,65 @@ function playRound(playerSelection, computerSelection) {
   }
   playerSelection = capitalize(playerSelection);
   if(playerSelection === computerSelection) {
-    console.log("Tie!");
-    retVal = 0;
+    retVal = "Tie";
   }
   if(playerSelection === "Rock") {
     if(computerSelection === "Paper") {
-      retVal = -1;
+      retVal = "Loss";
     }
     else if(computerSelection == "Scissors") {
-      retVal = 1;
+      retVal = "Win";
     }
   }
   else if (playerSelection === "Paper") {
     if(computerSelection === "Rock") {
-      retVal = 1;
+      retVal = "Win";
     }
     else if(computerSelection === "Scissors"){
-      retVal = -1;
+      retVal = "Loss";
     }
   }
   else if(playerSelection === "Scissors") {
     if(computerSelection === "Rock") {
-      retVal = -1;
+      retVal = "Loss";
     }
     else if(computerSelection === "Paper") {
-      retVal = 1;
+      retVal = "Win";
     }
   }
   else {
-    return -99;
+    return "Error: Player input";
   }
   console.log(`You chose ${playerSelection}!` + 
     ` The Computer chose ${computerSelection}.`);
   return retVal;
 }
 
-/*
-function game() {
-  console.log("Lets play Rock, Paper Scissors! First to 5 wins!");
-  let playPrompt;
-  let score = {
-    playerScore: 0,
-    computerScore: 0
-  };
-  while(true) {
-    playPrompt = prompt("Enter Rock, Paper, or Scissors!");
-    let result = playRound(playPrompt, computerPlay());
-    switch(result) {
-      case -1:
-        score.computerScore++;
-        console.log(`You lose this round! Player Score: ${score.playerScore}` +
-         ` vs. Computer Score: ${score.computerScore}`);
-        break;
-      case 0:
-        console.log("Tie!");
-        break;
-      case 1:
-        score.playerScore++;
-        console.log(`You win this round! Player Score: ${score.playerScore}` +
-         ` vs. Computer Score: ${score.computerScore}`);
-        break;
-      case -99:
-        console.log("Input error -- please make sure you enter Rock, Paper" +
-        ", or Scissors");
-        i--; //Decrement i since round was not successfully played
-    }
-  }
-  if(score.playerScore > score.computerScore) {
-    console.log(`You won overall! Player Score: ${score.playerScore}` +
-    ` vs. Computer Score: ${score.computerScore}`);
-  }
-  else if(score.computerScore > score.playerScore) {
-    console.log(`You lost overall! Player Score: ${score.playerScore}` +
-    ` vs. Computer Score: ${score.computerScore}`);
-  }
-  else {
-    console.log("Tie! How drab!");
-  }
-}*/
 
-function capitalize(string) {
-  return string.slice(0,1).toUpperCase() + string.slice(1);
+score = {
+  playerScore: 0,
+  computerScore: 0
+};
+
+function gameStateUpdate(result) {
+  switch(result) {
+    case "Loss":
+      score.computerScore++;
+      console.log(`You lose this round! Player Score: ${score.playerScore}` +
+       ` vs. Computer Score: ${score.computerScore}`);
+      break;
+    case "Tie":
+      console.log("Tie!");
+      break;
+    case "Win":
+      score.playerScore++;
+      console.log(`You win this round! Player Score: ${score.playerScore}` +
+       ` vs. Computer Score: ${score.computerScore}`);
+      break;
+    default:
+      console.log("Input error -- please make sure you enter Rock, Paper" +
+      ", or Scissors");
+  }
 }
 
 const rockBtn = document.querySelector('#rock');
@@ -106,13 +85,22 @@ const paperBtn = document.querySelector('#paper');
 const scissorsBtn = document.querySelector('#scissors');
 
 rockBtn.addEventListener('click', () => {
-  playRound("rock", computerPlay());
+  let result = playRound("rock", computerPlay());
+  gameStateUpdate(result);
 });
 
 paperBtn.addEventListener('click', () => {
-  playRound("paper", computerPlay());
+  let result = playRound("paper", computerPlay());
+  gameStateUpdate(result);
 });
 
 scissorsBtn.addEventListener('click', () => {
-  playRound("scissors", computerPlay());
+  let result = playRound("scissors", computerPlay());
+  gameStateUpdate(result);
 });
+
+
+
+function capitalize(string) {
+  return string.slice(0,1).toUpperCase() + string.slice(1);
+}
