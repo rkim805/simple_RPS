@@ -109,13 +109,9 @@ function gameStateUpdate(result) {
       btn.disabled = true;
     })
     if(score.computerScore < score.playerScore) {
-      scoreDisplay.textContent = ` Player Score: ${score.playerScore}` +
-      ` vs. Computer Score: ${score.computerScore}`;
       finalResult.textContent = "You won the first to 5!";
     }
     else if(score.computerScore > score.playerScore) {
-      scoreDisplay.textContent = ` Player Score: ${score.playerScore}` +
-      ` vs. Computer Score: ${score.computerScore}`;
       finalResult.textContent = "You lost the first to 5. :(";
     };
   }
